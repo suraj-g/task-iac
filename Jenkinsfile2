@@ -1,0 +1,63 @@
+node{
+
+    
+
+    stage ("Git Checkout"){
+
+    git credentialsId: 'GIT_CREDENTIALS', url: ''
+
+}
+
+ 
+
+    stage ("Maven Build"){
+
+        
+
+        def mavenHome= tool name:"M3" , type: "maven"
+
+        def mavenCMD= "${mavenHome}/bin/mvn"
+
+        sh "${mavenCMD} clean package"
+
+    }
+
+    
+
+    stage ("Build Docker Image"){
+
+        sh "docker build -t saswat/apple ."
+
+    }
+
+    
+
+    stage ("Push to docker registry"){
+
+        sh "docker login -u saswatpattnaik21 -p"
+
+        sh "docker push saswat/apple"
+
+    }
+
+}
+
+ 
+
+ 
+
+     stage("Deploy To Kuberates Cluster"){
+
+       kubernetesDeploy(
+
+         configs: 'springBootMongo.yml',
+
+         kubeconfigId: 'KUBERNATES_CONFIG',
+
+         enableConfigSubstitution: true
+
+        )
+
+     }
+
+ 

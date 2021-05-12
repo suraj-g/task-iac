@@ -21,11 +21,11 @@ Notes
 this module deploys one EC2 instance
 upon start, the machine runs the deploy-hello-node.js script, which
 pulls and runs the Hello-World docker app.
-the instance is not configured with an SSH key, so logging into the instance is not possible.
+The instance is not configured with an SSH key, so logging into the instance is not possible.
 
-the app is acessible via load-balancer DNS.
-the app is accessible via instance public ip (will be removed in future versions).
+The app is acessible via load-balancer DNS.
+The app is accessible via instance public ip (will be removed in future versions).
 AMI's are region specific
-if you change the region, you must change the AMI
-destroy the resources as soon as you do not need them anymore
+If you change the region, you must change the AMI
+Destroy the resources as soon as you do not need them anymore
 
